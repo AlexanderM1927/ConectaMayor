@@ -11,11 +11,12 @@ pipeline {
         string(
             name: 'VERIFY_URL',
             defaultValue: '',
-            description: 'URL base del sitio publicado, por ejemplo https://conectamayor.example. Vacío: verificar solo los archivos desplegados.'
+            description: 'URL pública opcional, por ejemplo https://conectamayor.alexanderm.co. Siempre se verifica también http://127.0.0.1:8007.'
         )
     }
 
     environment {
+        CONECTAMAYOR_DEPLOY_DIR = '/var/www/apps/conectamayor'
         CONECTAMAYOR_APP_DIR = '/var/www/apps/conectamayor/public'
     }
 
@@ -33,6 +34,7 @@ pipeline {
 
                     command -v docker >/dev/null
                     command -v rsync >/dev/null
+                    command -v curl >/dev/null
                     docker compose version
                     docker compose config --quiet
 
@@ -92,6 +94,15 @@ pipeline {
                         mv -f "$staged_file" "$CONECTAMAYOR_APP_DIR/$entry_file"
                         staged_file=''
                     done
+
+                    # El servidor estático queda fuera del proyecto temporal de CI.
+                    mkdir -p "$CONECTAMAYOR_DEPLOY_DIR/deploy"
+                    rsync -az deploy/ "$CONECTAMAYOR_DEPLOY_DIR/deploy/"
+                    cp compose.production.yaml "$CONECTAMAYOR_DEPLOY_DIR/compose.production.yaml"
+
+                    docker compose -p conectamayor-production \
+                        -f "$CONECTAMAYOR_DEPLOY_DIR/compose.production.yaml" \
+                        up -d --build --wait --wait-timeout 60
                 '''
             }
         }
@@ -105,16 +116,15 @@ pipeline {
                         cmp "front/dist/pwa/$entry_file" "$CONECTAMAYOR_APP_DIR/$entry_file"
                     done
 
-                    if [ -n "$VERIFY_URL" ]; then
-                        command -v curl >/dev/null
-                        checked_file=$(mktemp)
-                        trap 'rm -f "$checked_file"' EXIT HUP INT TERM
+                    checked_file=$(mktemp)
+                    trap 'rm -f "$checked_file"' EXIT HUP INT TERM
 
+                    check_version() {
                         curl --fail --silent --show-error --location \
                             --connect-timeout 10 --max-time 30 \
                             --retry 3 --retry-delay 2 --retry-connrefused \
                             --header 'Cache-Control: no-cache' \
-                            "${VERIFY_URL%/}/version.json?build=$BUILD_NUMBER" \
+                            "${1%/}/version.json?build=$BUILD_NUMBER" \
                             --output "$checked_file"
 
                         if ! cmp front/dist/pwa/version.json "$checked_file"; then
@@ -122,8 +132,11 @@ pipeline {
                             exit 1
                         fi
                         echo '[verify] La URL sirve la versión desplegada.'
-                    else
-                        echo '[verify] Archivos verificados. Configurar VERIFY_URL para verificar también HTTP.'
+                    }
+
+                    check_version http://127.0.0.1:8007
+                    if [ -n "$VERIFY_URL" ]; then
+                        check_version "$VERIFY_URL"
                     fi
                 '''
             }

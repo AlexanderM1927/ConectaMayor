@@ -1,0 +1,23 @@
+name: conectamayor-production
+
+services:
+  web:
+    build:
+      context: ./deploy
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8007:80"
+    volumes:
+      - type: bind
+        source: ${CONECTAMAYOR_APP_DIR:-/var/www/apps/conectamayor/public}
+        target: /usr/share/nginx/html
+        read_only: true
+        bind:
+          create_host_path: false
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/index.html"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s

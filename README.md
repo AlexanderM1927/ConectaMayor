@@ -322,7 +322,7 @@ El `Jenkinsfile` contempla el ciclo del frontend: preparación, compilación PWA
 
 Configurar el job con este repositorio y `Jenkinsfile` como ruta del pipeline. El checkout debe dejar `compose.yaml` y `front/` en la raíz del workspace del job. Si el repositorio contiene varios proyectos, seleccionar la carpeta `ConectaMayor` como raíz de ejecución del pipeline.
 
-El agente Jenkins debe ser Linux, disponer de Docker con Compose, `rsync`, `cmp` y `mktemp`, y tener permisos para usar el motor Docker y escribir en `/var/www/apps/conectamayor/public`. El workspace debe ser accesible para el motor Docker local, porque Compose monta `front/` durante la compilación. El agente debe estar en el servidor donde se publican los archivos; si existen varios agentes, asignar el job al agente de despliegue correspondiente.
+El agente Jenkins debe ser Linux, disponer de Docker con Compose compatible con `up --wait`, `rsync`, `curl`, `cmp` y `mktemp`, y tener permisos para usar el motor Docker y escribir en `/var/www/apps/conectamayor`. El workspace debe ser accesible para el motor Docker local, porque Compose monta `front/` durante la compilación. El agente debe estar en el servidor donde se publican los archivos; si existen varios agentes, asignar el job al agente de despliegue correspondiente.
 
 El pipeline realiza lo siguiente:
 
@@ -330,16 +330,40 @@ El pipeline realiza lo siguiente:
 2. Ejecuta `npm run build` en un contenedor temporal y verifica `index.html`, `manifest.json` y `sw.js`.
 3. Añade `version.json` con el número de ejecución y el commit, y archiva los archivos de la PWA en Jenkins.
 4. Copia la PWA a `/var/www/apps/conectamayor/public`, conservando recursos de versiones anteriores para pestañas abiertas. Los archivos de entrada se sustituyen individualmente mediante renombrado para evitar archivos parcialmente escritos.
-5. Compara los archivos de entrada publicados con la compilación. Si se configura el parámetro `VERIFY_URL`, consulta `version.json` por HTTP y comprueba que corresponde a la ejecución. Requiere `curl`; un fallo de red o una versión distinta hace fallar el pipeline.
-6. Elimina los contenedores, volúmenes e imagen temporal del proyecto Compose de esa ejecución. No afecta al proyecto Compose de desarrollo.
+5. Copia la configuración de producción a `/var/www/apps/conectamayor`, construye el servidor estático y lo inicia con `compose.production.yaml`, esperando que pase su comprobación de salud.
+6. Compara los archivos de entrada publicados con la compilación y comprueba por HTTP que `http://127.0.0.1:8007/version.json` corresponde a la ejecución. Si se configura `VERIFY_URL`, por ejemplo `https://conectamayor.alexanderm.co`, también verifica esa URL. Un fallo de red o una versión distinta hace fallar el pipeline.
+7. Elimina los contenedores, volúmenes e imagen temporal del proyecto Compose de esa ejecución. No afecta al proyecto Compose de desarrollo ni al de producción.
 
-El Dockerfile de desarrollo también se utiliza para compilar en CI: Jenkins sobrescribe su comando de inicio con `npm run build`, por lo que no arranca el servidor de desarrollo. No se requieren cambios en el Dockerfile para este flujo. La imagen no se utiliza como servidor de producción.
+El Dockerfile `front/Dockerfile` también se utiliza para compilar en CI: Jenkins sobrescribe su comando de inicio con `npm run build`, por lo que no arranca el servidor de desarrollo. Este archivo no necesita cambios. `deploy/Dockerfile` crea la imagen de producción con Nginx y la configuración `deploy/nginx.conf`; sirve exclusivamente los archivos compilados, montados en modo de solo lectura.
 
-El servidor web debe configurarse por separado para servir `/var/www/apps/conectamayor/public` por HTTPS. Debe revalidar `index.html`, `manifest.json`, `sw.js` y `version.json`; los recursos con hash en `assets/` pueden tener caché prolongada. Las rutas hash de la aplicación no requieren redirección al documento inicial. El pipeline no configura dominios, certificados o el servidor web, y no utiliza backend ni PM2.
+El contenedor de producción publica `127.0.0.1:8007` en el servidor. Revalida los puntos de entrada de la PWA y permite caché prolongada para los recursos con hash de `assets/`. Las rutas hash de la aplicación no requieren redirección al documento inicial. No utiliza backend ni PM2.
+
+### Producción y proxy HTTPS
+
+La configuración de Nginx consultada en `C:\Users\johna\Documents\OLD PC\.envs\nginx\default` ya contiene el dominio `conectamayor.alexanderm.co`, sus certificados HTTPS y el proxy hacia `http://127.0.0.1:8007`. El despliegue se adapta a ese destino sin modificar ese archivo externo.
+
+```text
+https://conectamayor.alexanderm.co
+    --> Nginx del servidor (HTTPS)
+    --> http://127.0.0.1:8007
+    --> contenedor Nginx, puerto 80
+    --> /var/www/apps/conectamayor/public (PWA)
+```
+
+El dominio usa HTTPS en el Nginx externo; `8007` es el puerto HTTP interno del servidor. Desarrollo sigue usando `localhost:9001`.
+
+Para administrar el servicio, desde `/var/www/apps/conectamayor` en el servidor:
+
+```bash
+docker compose -p conectamayor-production -f compose.production.yaml ps
+docker compose -p conectamayor-production -f compose.production.yaml logs --tail 80 web
+```
+
+El servicio utiliza `restart: unless-stopped` y una comprobación de salud HTTP. El Nginx externo y sus certificados deben estar activos en el servidor; Jenkins no instala ni recarga esa configuración.
 
 No se requieren credenciales `.env` para la configuración actual. Las variables incorporadas a una PWA son públicas y no deben contener secretos. El despliegue conserva los archivos antiguos de recursos; su limpieza se gestionará por separado cuando exista una política de retención. No se implementa rollback automático si falla la verificación posterior al despliegue.
 
-Se verificaron localmente la compilación con un proyecto Compose aislado y la sintaxis shell de las etapas. En un contenedor temporal se comprobó la copia de archivos, la conservación de recursos antiguos y la verificación HTTP tanto con una versión correcta como con una incorrecta. La ejecución completa del pipeline en Jenkins y el despliegue al servidor real quedan pendientes de configurar allí.
+Se verificaron localmente la compilación con un proyecto Compose aislado y la sintaxis shell de las etapas. En un contenedor temporal se comprobó la copia de archivos, la conservación de recursos antiguos y la verificación HTTP tanto con una versión correcta como con una incorrecta. También se probó el servidor de producción en `127.0.0.1:8007`: configuración Nginx válida, estado saludable, HTTP 200 para la PWA y sus puntos de entrada, cabeceras de caché previstas y HTTP 404 para archivos inexistentes. La ejecución completa del pipeline en Jenkins y el despliegue al servidor real quedan pendientes de configurar allí.
 
 ## Validación de la primera versión
 
