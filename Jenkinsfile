@@ -10,7 +10,7 @@ pipeline {
     parameters {
         string(
             name: 'VERIFY_URL',
-            defaultValue: '',
+            defaultValue: 'https://conectamayor.alexanderm.co',
             description: 'URL pública opcional, por ejemplo https://conectamayor.alexanderm.co. Siempre se verifica también http://127.0.0.1:8007.'
         )
     }
