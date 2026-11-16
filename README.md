@@ -1,12 +1,14 @@
 # ConectaMayor
 
-ConectaMayor será una aplicación web progresiva (PWA) orientada a personas mayores que desean aprender a realizar actividades digitales cotidianas y reconocer situaciones de fraude. Ofrecerá instrucciones sencillas, tutoriales interactivos, simulaciones seguras y ejercicios que cada persona podrá completar a su propio ritmo.
+ConectaMayor es una aplicación web progresiva (PWA) orientada a personas mayores que desean aprender a realizar actividades digitales cotidianas y reconocer situaciones de fraude. Ofrece instrucciones sencillas, tutoriales interactivos, simulaciones seguras y ejercicios que cada persona puede completar a su propio ritmo.
 
-La aplicación funcionará exclusivamente en el cliente, sin backend. El progreso, las respuestas y las preferencias se guardarán en IndexedDB, dentro del navegador del dispositivo utilizado.
+La aplicación funciona exclusivamente en el cliente, sin backend. El progreso, las respuestas y las preferencias se guardan en IndexedDB, dentro del navegador del dispositivo utilizado.
 
 ## Estado del proyecto
 
-**Etapa actual: preparación del entorno de desarrollo.** Se dispone de una base Quasar con Vue Router, Pinia, configuración PWA y Docker Compose para el frontend. La pantalla inicial es provisional. Los módulos educativos, la persistencia en IndexedDB y los entregables de diseño y accesibilidad siguen pendientes.
+**Etapa actual: primera versión funcional.** Incluye cuatro tutoriales de cuatro pasos, seis ejemplos de prevención, seis simulaciones, una evaluación de seis preguntas, progreso con logros, ayuda, ajustes de lectura y persistencia en IndexedDB. La interfaz adapta los prototipos suministrados a móvil y escritorio, con Material Icons locales como en `homewithchrist`.
+
+Consultar los [requisitos implementados](docs/requisitos.md), la [navegación](docs/navegacion.md), los [bocetos](docs/diseno/baja-fidelidad/README.md), el [diseño visual](docs/diseno/media-fidelidad/README.md), la [lista de accesibilidad](docs/accesibilidad/checklist.md) y las [capturas y pruebas](docs/evidencias/README.md). Quedan pendientes las pruebas con personas mayores, lectores de pantalla reales e instalación en dispositivos físicos; las comprobaciones automáticas no equivalen a una certificación.
 
 ## Objetivos
 
@@ -18,7 +20,7 @@ La aplicación funcionará exclusivamente en el cliente, sin backend. El progres
 
 ## Alcance
 
-La primera versión incluirá un menú principal, tutoriales de actividades cotidianas, ejemplos de fraudes, simulaciones interactivas, evaluaciones básicas, seguimiento del progreso y una sección de ayuda y ajustes de accesibilidad.
+La primera versión incluye un menú principal, tutoriales de actividades cotidianas, ejemplos de fraudes, simulaciones interactivas, evaluación básica, seguimiento del progreso y una sección de ayuda y ajustes de accesibilidad.
 
 Se distribuirá únicamente como PWA, utilizable desde el navegador e instalable cuando este lo permita. No se desarrollarán aplicaciones nativas ni se incorporarán Capacitor, autenticación, API de negocio, base de datos remota o sincronización entre dispositivos. Las prácticas no enviarán mensajes, efectuarán pagos ni abrirán enlaces sospechosos reales.
 
@@ -32,7 +34,7 @@ Se distribuirá únicamente como PWA, utilizable desde el navegador e instalable
 
 Se adaptarán estas convenciones al aprendizaje digital y la persistencia local. Los servicios de ConectaMayor accederán a IndexedDB; no se trasladarán los módulos de backend, autenticación, IA o despliegue nativo de la referencia.
 
-## Arquitectura propuesta
+## Arquitectura
 
 | Capa | Tecnología o responsabilidad |
 | --- | --- |
@@ -62,14 +64,19 @@ PWA: pantallas y componentes
 
 IndexedDB almacenará datos de uso; Cache Storage conservará los recursos de la PWA. La interfaz accederá a los datos mediante servicios, sin duplicar la lógica de persistencia en las pantallas. El alojamiento estático solo entregará archivos y no procesará información de aprendizaje.
 
-### Estructura prevista
+### Estructura del proyecto
 
-El siguiente árbol es una propuesta; no representa archivos ya creados.
+Organización de las áreas principales; los componentes y las páginas se encuentran en `front/src/`.
 
 ```text
 ConectaMayor/
 |-- README.md
 |-- compose.yaml
+|-- compose.production.yaml
+|-- Jenkinsfile
+|-- deploy/
+|   |-- Dockerfile
+|   `-- nginx.conf
 |-- docs/
 |   |-- requisitos.md
 |   |-- navegacion.md
@@ -88,13 +95,13 @@ ConectaMayor/
     |-- package.json
     |-- quasar.config.js
     |-- public/
-    |   `-- icons/
+    |   |-- icons/
+    |   `-- images/
     |-- src-pwa/
     |   |-- manifest.json
     |   `-- register-service-worker.js
     `-- src/
         |-- App.vue
-        |-- assets/
         |-- boot/
         |-- components/
         |-- composables/
@@ -105,8 +112,7 @@ ConectaMayor/
         |-- router/
         |-- services/
         |   `-- db/
-        |-- stores/
-        `-- utils/
+        `-- stores/
 ```
 
 ## Menú principal y navegación
@@ -207,7 +213,7 @@ La revisión combinará mediciones de contraste, herramientas automáticas y rec
 
 ## Persistencia local y privacidad
 
-La base IndexedDB propuesta se llamará `conectamayor`. Tendrá un esquema versionado y migraciones que preserven el progreso existente.
+La base IndexedDB se llama `conectamayor` y utiliza un esquema versionado. Los cambios futuros del esquema deberán incorporar migraciones que preserven el progreso existente.
 
 | Almacén | Datos previstos |
 | --- | --- |
@@ -241,23 +247,23 @@ Las evidencias se organizarán por fase y pantalla, con nombres descriptivos com
 
 ## Plan de trabajo y entregables
 
-Todas las tareas siguientes están pendientes. Se marcarán como completas cuando exista el entregable y se haya revisado su criterio de aceptación.
+Los siguientes entregables están implementados y documentados para la primera versión. Los límites de la verificación y las revisiones con personas pendientes se registran en la lista de accesibilidad.
 
-- [ ] Diseñar una interfaz con letras legibles, botones grandes y contraste adecuado; documentar estilos y mediciones.
-- [ ] Diseñar el menú principal y organizar las secciones; entregar el mapa de navegación.
-- [ ] Redactar instrucciones claras para navegar y utilizar cada módulo; incorporarlas en las pantallas.
-- [ ] Diseñar tutoriales interactivos sobre actividades digitales cotidianas; entregar contenido y recorridos.
-- [ ] Elaborar ejemplos educativos de mensajes sospechosos y fraudes; explicar señales y acciones seguras.
-- [ ] Diseñar simulaciones de enlaces y solicitudes sospechosas con datos ficticios; comprobar que no producen acciones externas.
-- [ ] Crear preguntas y ejercicios básicos; asociarlos a los objetivos de aprendizaje.
-- [ ] Diseñar mensajes de retroalimentación para respuestas correctas e incorrectas; revisar claridad y tono.
-- [ ] Conectar las pantallas y configurar la navegación del prototipo; verificar los recorridos completos.
-- [ ] Revisar facilidad de uso, legibilidad y accesibilidad; registrar hallazgos y correcciones.
-- [ ] Documentar los requisitos funcionales y de accesibilidad en `docs/requisitos.md`, partiendo de este README.
-- [ ] Elaborar bocetos de baja fidelidad de las pantallas principales; guardarlos en `docs/diseno/baja-fidelidad/`.
-- [ ] Elaborar las pantallas de media fidelidad del prototipo; guardarlas en `docs/diseno/media-fidelidad/`.
-- [ ] Aplicar una lista de verificación de accesibilidad y registrar mejoras en `docs/accesibilidad/`.
-- [ ] Organizar capturas, evidencias y documentación con un índice en `docs/evidencias/`.
+- [x] Diseñar una interfaz con letras legibles, botones grandes y contraste adecuado; documentar estilos y mediciones.
+- [x] Diseñar el menú principal y organizar las secciones; entregar el mapa de navegación.
+- [x] Redactar instrucciones claras para navegar y utilizar cada módulo; incorporarlas en las pantallas.
+- [x] Diseñar tutoriales interactivos sobre actividades digitales cotidianas; entregar contenido y recorridos.
+- [x] Elaborar ejemplos educativos de mensajes sospechosos y fraudes; explicar señales y acciones seguras.
+- [x] Diseñar simulaciones de enlaces y solicitudes sospechosas con datos ficticios; comprobar que no producen acciones externas.
+- [x] Crear preguntas y ejercicios básicos; asociarlos a los objetivos de aprendizaje.
+- [x] Diseñar mensajes de retroalimentación para respuestas correctas e incorrectas; revisar claridad y tono.
+- [x] Conectar las pantallas y configurar la navegación del prototipo; verificar los recorridos completos.
+- [x] Revisar facilidad de uso, legibilidad y accesibilidad; registrar hallazgos y correcciones.
+- [x] Documentar los requisitos funcionales y de accesibilidad en `docs/requisitos.md`.
+- [x] Elaborar bocetos de baja fidelidad de las pantallas principales en `docs/diseno/baja-fidelidad/`.
+- [x] Elaborar las pantallas de media fidelidad del prototipo y documentarlas en `docs/diseno/media-fidelidad/`.
+- [x] Aplicar una lista de verificación de accesibilidad y registrar mejoras en `docs/accesibilidad/`.
+- [x] Organizar capturas, evidencias y documentación con un índice en `docs/evidencias/`.
 
 ## Desarrollo local con Docker
 
@@ -308,11 +314,11 @@ Detener el entorno conservando el volumen de dependencias:
 docker compose down
 ```
 
-La navegación utiliza rutas hash para facilitar el alojamiento estático sin reglas especiales de redirección. Las fuentes e iconos de Quasar se incluyen localmente. `idb` está instalado como base para implementar IndexedDB; todavía no se guardan datos de aprendizaje. Los iconos con las iniciales «CM» y la pantalla de bienvenida son provisionales.
+La navegación utiliza rutas hash para facilitar el alojamiento estático sin reglas especiales de redirección. Las fuentes e iconos de Quasar y la ilustración se incluyen localmente. `idb` centraliza el acceso a IndexedDB; se guardan el avance, los intentos y los ajustes de lectura. La pantalla de inicio enlaza con todos los módulos y permite continuar un tutorial pendiente.
 
 ### Verificación del entorno inicial
 
-Se verificaron la configuración Compose, la instalación de dependencias y la compilación PWA dentro de Docker. La compilación generó la interfaz, el manifiesto, los iconos y el service worker en `front/dist/pwa/`. La instalación y el funcionamiento sin conexión en un navegador siguen pendientes de prueba.
+Se verificaron la configuración Compose, la instalación de dependencias y la compilación PWA dentro de Docker. La compilación genera la interfaz, el manifiesto, los iconos y el service worker en `front/dist/pwa/`. La primera versión funcional añade pruebas de navegador sobre el recorrido educativo, la persistencia y la reapertura sin conexión; ver [evidencias](docs/evidencias/README.md). La instalación en dispositivos físicos queda pendiente.
 
 La instalación conserva la rama `@quasar/app-vite` 2 de la referencia. En la auditoría inicial, `npm audit` reportó 10 avisos (3 altos, 6 moderados y 1 bajo); `npm audit --omit=dev` reportó 1 bajo en `esbuild`. `npm audit fix` no encontró una solución dentro de los rangos actuales. Queda pendiente actualizar las herramientas a la rama 3 y revisar sus cambios según la [guía oficial de Quasar](https://quasar.dev/quasar-cli-vite/upgrade-guide/). El contenedor de desarrollo se publica únicamente en la interfaz local del equipo.
 

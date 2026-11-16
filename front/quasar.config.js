@@ -1,7 +1,7 @@
 import { defineConfig } from '#q-app/wrappers'
 
 export default defineConfig(() => ({
-  boot: [],
+  boot: ['learning'],
   css: ['app.css'],
   extras: ['roboto-font', 'material-icons'],
   build: {
@@ -18,7 +18,13 @@ export default defineConfig(() => ({
   framework: {
     lang: 'es',
     config: {
-      brand: { primary: '#18584a', secondary: '#315b78' }
+      brand: {
+        primary: '#126f74',
+        secondary: '#275f8b',
+        positive: '#25754b',
+        negative: '#a53636',
+        warning: '#88530e'
+      }
     },
     plugins: ['Notify', 'Dialog']
   },
@@ -27,6 +33,7 @@ export default defineConfig(() => ({
     extendGenerateSWOptions(options) {
       options.skipWaiting = false
       options.clientsClaim = true
+      options.maximumFileSizeToCacheInBytes = 8 * 1024 * 1024
     }
   }
 }))

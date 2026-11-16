@@ -1,34 +1,23 @@
 import { register } from 'register-service-worker'
-import { Notify } from 'quasar'
+import { usePwa } from 'src/composables/usePwa'
+
+const pwa = usePwa()
 
 register(process.env.SERVICE_WORKER_FILE, {
+  ready() {
+    if (process.env.PROD) pwa.offlineReady.value = true
+  },
   cached() {
-    Notify.create({
-      message: 'ConectaMayor está listo para usarse sin conexión.',
-      timeout: 0,
-      actions: [{ label: 'Cerrar', color: 'white' }]
-    })
+    if (process.env.PROD) pwa.offlineReady.value = true
   },
   updated(registration) {
-    Notify.create({
-      message: 'Hay una nueva versión disponible.',
-      timeout: 0,
-      actions: [
-        {
-          label: 'Actualizar',
-          color: 'white',
-          handler() {
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-              window.location.reload()
-            }, { once: true })
-            registration.waiting?.postMessage({ type: 'SKIP_WAITING' })
-          }
-        },
-        { label: 'Después', color: 'white' }
-      ]
-    })
+    pwa.waitingWorker.value = registration.waiting
   },
   error(error) {
+    if (!navigator.onLine) {
+      if (process.env.PROD && navigator.serviceWorker.controller) pwa.offlineReady.value = true
+      return
+    }
     console.error('No se pudo preparar el uso sin conexión.', error)
   }
 })

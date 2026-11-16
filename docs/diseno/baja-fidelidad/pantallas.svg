@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1800" role="img" aria-labelledby="title desc"><title id="title">ConectaMayor: bocetos de nueve pantallas</title><desc id="desc">Baja fidelidad de inicio, tutoriales, pasos, prevención, ejemplo, simulador, evaluación, progreso y ayuda.</desc><rect width="1200" height="1800" fill="#f4f4f4"/><g font-family="Arial, sans-serif" fill="#333"><text x="40" y="45" font-size="27" font-weight="bold">ConectaMayor · Bocetos de baja fidelidad</text><text x="40" y="76" font-size="17">Jerarquía, contenido y navegación · Sin estilos de marca</text>
+<g transform='translate(40,115)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Inicio</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Saludo y bienvenida</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Ilustración: aprender juntos</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Comenzar a aprender</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Tutoriales | Prevención</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>Simulador | Evaluación</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(430,115)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Tutoriales</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Título e instrucciones</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Buscar un tutorial</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>WhatsApp →</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Correo electrónico →</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>Videollamadas →</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Redes sociales →</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(820,115)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Paso a paso</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Volver a tutoriales</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Paso 2 de 4: progreso</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Explicación + demostración</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Pregunta de práctica</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>○ Opción A   ○ Opción B</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Comprobar / explicación</text>
+<rect x='17' y='370' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='395' font-size='16'>Anterior | Siguiente</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(40,665)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Prevención</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Detente · Verifica · Protege</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Tarjetas de situaciones</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Aviso bancario →</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Premio inesperado →</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>Familiar / código / enlace</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Comparación sin presión</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(430,665)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Ejemplo de fraude</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Volver a prevención</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Etiqueta: datos ficticios</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Mensaje simulado</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Mostrar las señales</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>Pistas y acción segura</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Marcar como revisado</text>
+<rect x='17' y='370' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='395' font-size='16'>Practicar esta situación</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(820,665)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Simulador</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Situación de ejemplo</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Etiqueta: datos ficticios</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Mensaje sin enlaces activos</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>¿Cómo actuarías?</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>○ Opción A   ○ Opción B</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Comprobar decisión</text>
+<rect x='17' y='370' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='395' font-size='16'>Reintentar / otra práctica</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(40,1215)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Evaluación</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Introducción y preguntas</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Pregunta 3 de 6</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Seleccionar una respuesta</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Comprobar y explicación</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>Siguiente pregunta</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Resultado y repaso</text>
+<rect x='17' y='370' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='395' font-size='16'>Repetir evaluación</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(430,1215)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Mi progreso</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Resumen de actividades</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Tutoriales / ejemplos</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Prácticas / evaluación</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Continuar un tutorial</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>Insignias por descubrir</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Historial de intentos</text>
+<rect x='17' y='370' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='395' font-size='16'>Estado de guardado local</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+<g transform='translate(820,1215)'><rect width='340' height='500' rx='20' fill='white' stroke='#777' stroke-width='2'/><rect x='1' y='1' width='338' height='53' rx='19' fill='#e7e7e7'/><text x='18' y='33' font-size='19' font-weight='bold'>Ayuda y ajustes</text>
+<rect x='17' y='76' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='101' font-size='16'>Tamaño del texto</text>
+<rect x='17' y='125' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='150' font-size='16'>Contraste y movimiento</text>
+<rect x='17' y='174' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='199' font-size='16'>Cómo usar la aplicación</text>
+<rect x='17' y='223' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='248' font-size='16'>Instalación PWA</text>
+<rect x='17' y='272' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='297' font-size='16'>Uso sin conexión</text>
+<rect x='17' y='321' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='346' font-size='16'>Privacidad y guardado</text>
+<rect x='17' y='370' width='306' height='39' rx='6' fill='#fafafa' stroke='#bbb'/><text x='28' y='395' font-size='16'>Borrar datos: confirmar</text>
+<line x1='0' y1='450' x2='340' y2='450' stroke='#999'/><text x='16' y='479' font-size='12'>Inicio | Aprende | Fraudes | Práctica | Evaluación</text></g>
+</g></svg>

@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-16T23:16:49.387Z",
+  "browser": "155.0.8059.39",
+  "results": [
+    "Inicio, ilustración local e idioma",
+    "Tutorial completo, selección con teclado, error, reintento y reanudación con IndexedDB",
+    "Señales de fraude, enlace inerte y ejemplo revisado persistido",
+    "Simulación, retroalimentación y registro de ambos intentos",
+    "Evaluación de seis preguntas, resultado y recuperación tras recarga",
+    "Resumen de progreso e insignias derivados de actividades reales",
+    "Tamaño de texto persistido, contraste y reflujo a 320px",
+    "Borrado local: cancelar conserva datos; confirmar elimina todos los almacenes de uso",
+    "Fallo de almacenamiento visible, conservación en memoria y reintento de guardado",
+    "Reapertura de la PWA sin red, módulo interactivo y persistencia offline",
+    "Recuperación de rutas no válidas",
+    "Recorridos completos de correo, videollamada y redes sociales",
+    "Las seis situaciones del simulador se resuelven y se guardan",
+    "Reflujo de seis vistas con tamaño de texto al 200 % en 320px",
+    "Auditoría automática de accesibilidad en nueve vistas"
+  ]
+}

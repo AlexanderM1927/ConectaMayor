@@ -1,0 +1,47 @@
+[
+  {
+    "route": "/",
+    "passes": 20,
+    "violations": []
+  },
+  {
+    "route": "/aprende",
+    "passes": 26,
+    "violations": []
+  },
+  {
+    "route": "/aprende/correo",
+    "passes": 18,
+    "violations": []
+  },
+  {
+    "route": "/enganos",
+    "passes": 18,
+    "violations": []
+  },
+  {
+    "route": "/enganos/banco",
+    "passes": 18,
+    "violations": []
+  },
+  {
+    "route": "/practica/banco",
+    "passes": 20,
+    "violations": []
+  },
+  {
+    "route": "/evaluacion",
+    "passes": 20,
+    "violations": []
+  },
+  {
+    "route": "/progreso",
+    "passes": 22,
+    "violations": []
+  },
+  {
+    "route": "/ayuda",
+    "passes": 26,
+    "violations": []
+  }
+]

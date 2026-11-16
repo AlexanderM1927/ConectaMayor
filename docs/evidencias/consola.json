@@ -1,0 +1,44 @@
+[
+  {
+    "level": "INFO",
+    "message": "http://127.0.0.1/#/ - Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.",
+    "source": "other",
+    "timestamp": 1794870980028
+  },
+  {
+    "level": "INFO",
+    "message": "http://127.0.0.1/#/aprende/mensajes - Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.",
+    "source": "other",
+    "timestamp": 1794870982857
+  },
+  {
+    "level": "INFO",
+    "message": "http://127.0.0.1/#/evaluacion - Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.",
+    "source": "other",
+    "timestamp": 1794870988819
+  },
+  {
+    "level": "INFO",
+    "message": "http://127.0.0.1/#/ayuda - Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.",
+    "source": "other",
+    "timestamp": 1794870989501
+  },
+  {
+    "level": "INFO",
+    "message": "http://127.0.0.1/#/ayuda - Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.",
+    "source": "other",
+    "timestamp": 1794870990057
+  },
+  {
+    "level": "SEVERE",
+    "message": "http://127.0.0.1/sw.js - Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "source": "network",
+    "timestamp": 1794870993331
+  },
+  {
+    "level": "INFO",
+    "message": "http://127.0.0.1/#/aprende/correo - Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.",
+    "source": "other",
+    "timestamp": 1794870993395
+  }
+]

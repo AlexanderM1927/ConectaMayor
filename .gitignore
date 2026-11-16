@@ -1,6 +1,7 @@
 front/node_modules/
 front/.quasar/
 front/dist/
+front/.qa/
 front/.env*
 !front/.env.example
 .env
