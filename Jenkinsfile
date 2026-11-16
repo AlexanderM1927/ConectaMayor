@@ -7,14 +7,6 @@ pipeline {
         timestamps()
     }
 
-    parameters {
-        string(
-            name: 'VERIFY_URL',
-            defaultValue: 'https://conectamayor.alexanderm.co',
-            description: 'URL pública opcional, por ejemplo https://conectamayor.alexanderm.co. Siempre se verifica también http://127.0.0.1:8007.'
-        )
-    }
-
     environment {
         CONECTAMAYOR_DEPLOY_DIR = '/var/www/apps/conectamayor'
         CONECTAMAYOR_APP_DIR = '/var/www/apps/conectamayor/public'
@@ -137,9 +129,6 @@ pipeline {
                     }
 
                     check_version http://127.0.0.1:8007
-                    if [ -n "$VERIFY_URL" ]; then
-                        check_version "$VERIFY_URL"
-                    fi
                 '''
             }
         }
