@@ -53,7 +53,9 @@ pipeline {
                     # run sobrescribe el CMD de desarrollo: no inicia el servidor Quasar.
                     docker compose run --rm --no-deps \
                         -e NODE_OPTIONS=--max-old-space-size=1536 \
-                        frontend npm run build
+                        -e CI_UID="$(id -u)" \
+                        -e CI_GID="$(id -g)" \
+                        frontend sh ./ci-build.sh
 
                     test -s front/dist/pwa/index.html
                     test -s front/dist/pwa/manifest.json

@@ -327,14 +327,16 @@ El agente Jenkins debe ser Linux, disponer de Docker con Compose compatible con 
 El pipeline realiza lo siguiente:
 
 1. Construye la imagen del frontend; el Dockerfile instala las dependencias con `npm ci` y prepara Quasar.
-2. Ejecuta `npm run build` en un contenedor temporal y verifica `index.html`, `manifest.json` y `sw.js`.
+2. Ejecuta `ci-build.sh` en un contenedor temporal para compilar y devolver la propiedad de `.quasar/` y `dist/` al UID/GID del agente Jenkins, incluso si falla Quasar. Verifica `index.html`, `manifest.json` y `sw.js`.
 3. Añade `version.json` con el número de ejecución y el commit, y archiva los archivos de la PWA en Jenkins.
 4. Copia la PWA a `/var/www/apps/conectamayor/public`, conservando recursos de versiones anteriores para pestañas abiertas. Los archivos de entrada se sustituyen individualmente mediante renombrado para evitar archivos parcialmente escritos.
 5. Copia la configuración de producción a `/var/www/apps/conectamayor`, construye el servidor estático y lo inicia con `compose.production.yaml`, esperando que pase su comprobación de salud.
 6. Compara los archivos de entrada publicados con la compilación y comprueba por HTTP que `http://127.0.0.1:8007/version.json` corresponde a la ejecución. Si se configura `VERIFY_URL`, por ejemplo `https://conectamayor.alexanderm.co`, también verifica esa URL. Un fallo de red o una versión distinta hace fallar el pipeline.
 7. Elimina los contenedores, volúmenes e imagen temporal del proyecto Compose de esa ejecución. No afecta al proyecto Compose de desarrollo ni al de producción.
 
-El Dockerfile `front/Dockerfile` también se utiliza para compilar en CI: Jenkins sobrescribe su comando de inicio con `npm run build`, por lo que no arranca el servidor de desarrollo. Este archivo no necesita cambios. `deploy/Dockerfile` crea la imagen de producción con Nginx y la configuración `deploy/nginx.conf`; sirve exclusivamente los archivos compilados, montados en modo de solo lectura.
+El Dockerfile `front/Dockerfile` también se utiliza para compilar en CI: Jenkins sobrescribe su comando de inicio con `sh ./ci-build.sh`, por lo que no arranca el servidor de desarrollo. Este archivo no necesita cambios. `deploy/Dockerfile` crea la imagen de producción con Nginx y la configuración `deploy/nginx.conf`; sirve exclusivamente los archivos compilados, montados en modo de solo lectura.
+
+Si Jenkins falla al crear `front/dist/pwa/version.json` con `Permission denied`, puede deberse a que una compilación anterior dejó los archivos como `root`. El script de CI corrige los directorios generados antes de devolver el control a Jenkins. Tras actualizar el repositorio, volver a ejecutar el pipeline completo; no reiniciar únicamente la etapa posterior a la compilación. El cambio de propiedad se limita a `.quasar/` y `dist/` del frontend.
 
 El contenedor de producción publica `127.0.0.1:8007` en el servidor. Revalida los puntos de entrada de la PWA y permite caché prolongada para los recursos con hash de `assets/`. Las rutas hash de la aplicación no requieren redirección al documento inicial. No utiliza backend ni PM2.
 
