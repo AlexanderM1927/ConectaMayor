@@ -316,6 +316,31 @@ Se verificaron la configuración Compose, la instalación de dependencias y la c
 
 La instalación conserva la rama `@quasar/app-vite` 2 de la referencia. En la auditoría inicial, `npm audit` reportó 10 avisos (3 altos, 6 moderados y 1 bajo); `npm audit --omit=dev` reportó 1 bajo en `esbuild`. `npm audit fix` no encontró una solución dentro de los rangos actuales. Queda pendiente actualizar las herramientas a la rama 3 y revisar sus cambios según la [guía oficial de Quasar](https://quasar.dev/quasar-cli-vite/upgrade-guide/). El contenedor de desarrollo se publica únicamente en la interfaz local del equipo.
 
+## CI/CD con Jenkins
+
+El `Jenkinsfile` contempla el ciclo del frontend: preparación, compilación PWA, despliegue estático y verificación. Node y npm se ejecutan dentro de Docker; no se necesita el plugin NodeJS de Jenkins ni una instalación global de Quasar.
+
+Configurar el job con este repositorio y `Jenkinsfile` como ruta del pipeline. El checkout debe dejar `compose.yaml` y `front/` en la raíz del workspace del job. Si el repositorio contiene varios proyectos, seleccionar la carpeta `ConectaMayor` como raíz de ejecución del pipeline.
+
+El agente Jenkins debe ser Linux, disponer de Docker con Compose, `rsync`, `cmp` y `mktemp`, y tener permisos para usar el motor Docker y escribir en `/var/www/apps/conectamayor/public`. El workspace debe ser accesible para el motor Docker local, porque Compose monta `front/` durante la compilación. El agente debe estar en el servidor donde se publican los archivos; si existen varios agentes, asignar el job al agente de despliegue correspondiente.
+
+El pipeline realiza lo siguiente:
+
+1. Construye la imagen del frontend; el Dockerfile instala las dependencias con `npm ci` y prepara Quasar.
+2. Ejecuta `npm run build` en un contenedor temporal y verifica `index.html`, `manifest.json` y `sw.js`.
+3. Añade `version.json` con el número de ejecución y el commit, y archiva los archivos de la PWA en Jenkins.
+4. Copia la PWA a `/var/www/apps/conectamayor/public`, conservando recursos de versiones anteriores para pestañas abiertas. Los archivos de entrada se sustituyen individualmente mediante renombrado para evitar archivos parcialmente escritos.
+5. Compara los archivos de entrada publicados con la compilación. Si se configura el parámetro `VERIFY_URL`, consulta `version.json` por HTTP y comprueba que corresponde a la ejecución. Requiere `curl`; un fallo de red o una versión distinta hace fallar el pipeline.
+6. Elimina los contenedores, volúmenes e imagen temporal del proyecto Compose de esa ejecución. No afecta al proyecto Compose de desarrollo.
+
+El Dockerfile de desarrollo también se utiliza para compilar en CI: Jenkins sobrescribe su comando de inicio con `npm run build`, por lo que no arranca el servidor de desarrollo. No se requieren cambios en el Dockerfile para este flujo. La imagen no se utiliza como servidor de producción.
+
+El servidor web debe configurarse por separado para servir `/var/www/apps/conectamayor/public` por HTTPS. Debe revalidar `index.html`, `manifest.json`, `sw.js` y `version.json`; los recursos con hash en `assets/` pueden tener caché prolongada. Las rutas hash de la aplicación no requieren redirección al documento inicial. El pipeline no configura dominios, certificados o el servidor web, y no utiliza backend ni PM2.
+
+No se requieren credenciales `.env` para la configuración actual. Las variables incorporadas a una PWA son públicas y no deben contener secretos. El despliegue conserva los archivos antiguos de recursos; su limpieza se gestionará por separado cuando exista una política de retención. No se implementa rollback automático si falla la verificación posterior al despliegue.
+
+Se verificaron localmente la compilación con un proyecto Compose aislado y la sintaxis shell de las etapas. En un contenedor temporal se comprobó la copia de archivos, la conservación de recursos antiguos y la verificación HTTP tanto con una versión correcta como con una incorrecta. La ejecución completa del pipeline en Jenkins y el despliegue al servidor real quedan pendientes de configurar allí.
+
 ## Validación de la primera versión
 
 Antes de considerar terminada la primera versión se comprobará que:
