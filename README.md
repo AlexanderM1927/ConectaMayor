@@ -6,7 +6,7 @@ La aplicación funciona exclusivamente en el cliente, sin backend. El progreso, 
 
 ## Estado del proyecto
 
-**Etapa actual: primera versión funcional.** Incluye cuatro tutoriales de cuatro pasos, seis ejemplos de prevención, seis simulaciones, una evaluación de seis preguntas, progreso con logros, ayuda, ajustes de lectura y persistencia en IndexedDB. La interfaz adapta los prototipos suministrados a móvil y escritorio, con Material Icons locales como en `homewithchrist`.
+**Etapa actual: primera versión funcional.** Incluye cuatro tutoriales de cuatro pasos, seis ejemplos de prevención, seis simulaciones, una evaluación de seis preguntas, progreso con logros, ayuda, ajustes de lectura y persistencia en IndexedDB. La interfaz adapta los prototipos suministrados a móvil y escritorio, con Material Icons locales.
 
 Consultar los [requisitos implementados](docs/requisitos.md), la [navegación](docs/navegacion.md), los [bocetos](docs/diseno/baja-fidelidad/README.md), el [diseño visual](docs/diseno/media-fidelidad/README.md), la [lista de accesibilidad](docs/accesibilidad/checklist.md) y las [capturas y pruebas](docs/evidencias/README.md). Quedan pendientes las pruebas con personas mayores, lectores de pantalla reales e instalación en dispositivos físicos; las comprobaciones automáticas no equivalen a una certificación.
 
@@ -348,7 +348,7 @@ El contenedor de producción publica `127.0.0.1:8007` en el servidor. Revalida l
 
 ### Producción y proxy HTTPS
 
-La configuración de Nginx consultada en `C:\Users\johna\Documents\OLD PC\.envs\nginx\default` ya contiene el dominio `conectamayor.alexanderm.co`, sus certificados HTTPS y el proxy hacia `http://127.0.0.1:8007`. El despliegue se adapta a ese destino sin modificar ese archivo externo.
+La configuración de Nginx consultada ya contiene el dominio `conectamayor.alexanderm.co`, sus certificados HTTPS y el proxy hacia `http://127.0.0.1:8007`. El despliegue se adapta a ese destino sin modificar ese archivo externo.
 
 ```text
 https://conectamayor.alexanderm.co
